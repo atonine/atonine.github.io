@@ -6,14 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>iOS 用objective-C实现简单的滚动标题栏（一） | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="iOS 用objective-C实现简单的滚动标题栏（一）
+滚动标题栏经常在各种app中出现，比如网易新闻，新浪新闻这类新闻app，还有斗鱼直播app也有出现。这篇文章主要介绍如何用objective-C实现简单的滚动栏，当然在github上有这个Demo，这是github的链接ScrollViewDemo新建一个PageTititleView的类，这个类是滚动标题栏中的标题视图部分，先在Page">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 用objective-C实现简单的滚动标题栏（一）">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/scrollDemoPart1/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="iOS 用objective-C实现简单的滚动标题栏（一）
+滚动标题栏经常在各种app中出现，比如网易新闻，新浪新闻这类新闻app，还有斗鱼直播app也有出现。这篇文章主要介绍如何用objective-C实现简单的滚动栏，当然在github上有这个Demo，这是github的链接ScrollViewDemo新建一个PageTititleView的类，这个类是滚动标题栏中的标题视图部分，先在Page">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3324252-f9281de57d0d8657.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-24T14:24:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="iOS 用objective-C实现简单的滚动标题栏（一）">
+<meta name="twitter:description" content="iOS 用objective-C实现简单的滚动标题栏（一）
+滚动标题栏经常在各种app中出现，比如网易新闻，新浪新闻这类新闻app，还有斗鱼直播app也有出现。这篇文章主要介绍如何用objective-C实现简单的滚动栏，当然在github上有这个Demo，这是github的链接ScrollViewDemo新建一个PageTititleView的类，这个类是滚动标题栏中的标题视图部分，先在Page">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3324252-f9281de57d0d8657.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -153,103 +162,150 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-scrollDemoPart1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      iOS 用objective-C实现简单的滚动标题栏（一）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/24/scrollDemoPart1/" class="archive-article-date">
+
+        
+        <a href="/2017/03/24/scrollDemoPart1/" class="archive-article-date">
   	<time datetime="2017-03-24T14:23:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/24/scrollDemoPart1/">iOS 用objective-C实现简单的滚动标题栏（一）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS-用objective-C实现简单的滚动标题栏（一）"><a href="#iOS-用objective-C实现简单的滚动标题栏（一）" class="headerlink" title="iOS 用objective-C实现简单的滚动标题栏（一）"></a>iOS 用objective-C实现简单的滚动标题栏（一）</h1><hr>
+<p>滚动标题栏经常在各种app中出现，比如网易新闻，新浪新闻这类新闻app，还有斗鱼直播app也有出现。这篇文章主要介绍如何用objective-C实现简单的滚动栏，<br>当然在github上有这个Demo，这是github的链接<a href="https://github.com/atonine/ScrollViewDemo" target="_blank" rel="external">ScrollViewDemo</a><br>新建一个PageTititleView的类，这个类是滚动标题栏中的标题视图部分，先在PageTitleView的头文件中声明初始化的类方法，titles就是标题的字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//PageTitleView.h</div><div class="line">@interface PageTitleView : UIView</div><div class="line"></div><div class="line">+(instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)array;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>随后我们在.m文件实现这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">@interface PageTitleView ()</div><div class="line"></div><div class="line">@property(copy,nonatomic)NSArray*titles;</div><div class="line"></div><div class="line">/*</div><div class="line">还有一部分属性没有写</div><div class="line">*/</div><div class="line"></div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation PageTitleView</div><div class="line"></div><div class="line"></div><div class="line">//省略了一部分的懒加载方法</div><div class="line">+(instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)array&#123;</div><div class="line">PageTitleView*pageTitleView = [[PageTitleView alloc]initWithFrame:frame];</div><div class="line"></div><div class="line">pageTitleView.titles = array;</div><div class="line"></div><div class="line">//其中还有一些代码随后再加上</div><div class="line"></div><div class="line">return pageTitleView;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后我们再建立PageContentView,这是展示滚动内容的视图。以下是初始化的类方法，他滚动切换的是视图控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//PageContentView.m</div><div class="line">+(instancetype)initWithFrame:(CGRect)frame ChildViewControllers:(NSMutableArray *)controllers parentViewController:(UIViewController *)parentVc&#123;</div><div class="line">PageContentView* pageContentView = [[PageContentView alloc]initWithFrame:frame];</div><div class="line">pageContentView.childVcs = controllers;</div><div class="line">pageContentView.parentViewController = parentVc;</div><div class="line"></div><div class="line">return pageContentView;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>pageContentView滚动视图的实现是用UICollectionView<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//PageContentView.m</div><div class="line">@interface PageContentView ()&lt;UICollectionViewDataSource,UICollectionViewDelegate&gt;</div><div class="line">/*</div><div class="line">省略部分属性</div><div class="line">*/</div><div class="line"></div><div class="line">@property(nonatomic,strong)UICollectionView*collectionView;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>collectionView的懒加载方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//PageContentView.m</div><div class="line">-(UICollectionView *)collectionView&#123;</div><div class="line">if (!_collectionView) &#123;</div><div class="line">UICollectionViewFlowLayout*layout = [[UICollectionViewFlowLayout alloc]init];</div><div class="line">layout.itemSize  = self.bounds.size;//cell的大小应该是contentView的大小</div><div class="line">layout.minimumLineSpacing = 0;</div><div class="line">layout.minimumInteritemSpacing = 0;</div><div class="line">layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;</div><div class="line"></div><div class="line"></div><div class="line">_collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];</div><div class="line">_collectionView.showsHorizontalScrollIndicator = NO;</div><div class="line">_collectionView.pagingEnabled = true;//内容滚动分页</div><div class="line">_collectionView.bounces = NO;</div><div class="line">_collectionView.dataSource = self;</div><div class="line">_collectionView.delegate = self;</div><div class="line">[_collectionView registerClass:UICollectionViewCell.self forCellWithReuseIdentifier:kCellID];</div><div class="line"></div><div class="line">&#125;</div><div class="line">return _collectionView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>关于CollectionView的DataSource方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section&#123;</div><div class="line">return self.childVcs.count;</div><div class="line">&#125;</div><div class="line">-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath&#123;</div><div class="line">UICollectionViewCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];</div><div class="line">UIViewController*childVc = self.childVcs[indexPath.item];</div><div class="line"></div><div class="line">childVc.view.frame = cell.contentView.bounds;</div><div class="line">[cell.contentView addSubview:childVc.view];//cell的视图为子控制的视图</div><div class="line">return cell;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后当我们要在PageTitleView的上面加上颜色和和滑动的线scrollLine,效果如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3324252-f9281de57d0d8657.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pageTitleView.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">//PageTitleView.m</div><div class="line">//先要设计PageTitleView上的titleLabel</div><div class="line">-(void)setTitleLabels&#123;</div><div class="line">NSInteger index = 0;</div><div class="line">CGFloat labelW = self.frame.size.width/(CGFloat)self.titles.count;</div><div class="line"></div><div class="line"></div><div class="line">CGFloat labelH = self.frame.size.height-2;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">CGFloat labelY = 0;</div><div class="line">for (NSString*title in self.titles) &#123;</div><div class="line">UILabel*label = [[UILabel alloc]init];</div><div class="line">NSLog(@&quot;%@&quot;,title);</div><div class="line">label.text = title;</div><div class="line">label.tag = index;</div><div class="line">label.font = [UIFont systemFontOfSize:16.0];</div><div class="line">label.textColor = [UIColor darkGrayColor];</div><div class="line">label.textAlignment = NSTextAlignmentCenter;</div><div class="line">//</div><div class="line">CGFloat labelX  = labelW*index;</div><div class="line">NSLog(@&quot;%f&quot;,labelX);</div><div class="line">label.frame = CGRectMake(labelX, labelY, labelW, labelH);</div><div class="line">[self.scrollView addSubview:label];</div><div class="line">[self.titleLabels addObject:label];</div><div class="line">label.userInteractionEnabled = YES;</div><div class="line"></div><div class="line">index++;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">-(void)setupBottomLineAndScrollLine&#123;</div><div class="line">//设置深灰色的底线</div><div class="line">UIView*bottomLine = [[UIView alloc]init];</div><div class="line">bottomLine.backgroundColor = [UIColor lightGrayColor];</div><div class="line">CGFloat lineH = 0.5;</div><div class="line">bottomLine.frame = CGRectMake(0, self.frame.size.height-lineH, self.frame.size.width, lineH);</div><div class="line">[self addSubview:bottomLine];</div><div class="line"></div><div class="line">if(self.titleLabels!=nil)&#123;</div><div class="line">UILabel*firstLabel = [self.titleLabels firstObject];</div><div class="line">firstLabel.textColor = [UIColor colorWithRed:kSelectedRed green:kSelectedGreen blue:kSelectedBlue];</div><div class="line">self.scrollLine.frame = CGRectMake(firstLabel.frame.origin.x, self.frame.size.height-kScrollLineH, firstLabel.frame.size.width, 2.0);</div><div class="line">[self.scrollView addSubview:self.scrollLine];//把scrollLine房子一个lable下面</div><div class="line"></div><div class="line"></div><div class="line">&#125;else&#123;</div><div class="line">return;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后当我们点击上面的其他label时，该label颜色变为橙色，原来位置的label变成原来的颜色，然后下面的橙色的scrollLine位置也会发生相应的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//PageTitleView.m</div><div class="line">-(void)titleLabelClickedWithGes:(UITapGestureRecognizer*)ges&#123;</div><div class="line"></div><div class="line">if (ges.view) &#123;</div><div class="line">UILabel *currentLabel = (UILabel*)ges.view;</div><div class="line">UILabel*oldLabel = self.titleLabels[self.currentIndex];</div><div class="line">self.currentIndex = currentLabel.tag;</div><div class="line">currentLabel.textColor = [UIColor orangeColor];</div><div class="line">oldLabel.textColor = [UIColor darkGrayColor];</div><div class="line">CGFloat scrollLineX = currentLabel.tag*self.scrollLine.frame.size.width;</div><div class="line">[UIView animateWithDuration:0.15 animations:^&#123;</div><div class="line">self.scrollLine.frame = CGRectMake(scrollLineX, self.frame.size.height-kScrollLineH, currentLabel.frame.size.width, 2.0);</div><div class="line">&#125;];</div><div class="line">[self.delegate pageTitletView:self selectedIndex:self.currentIndex];</div><div class="line">&#125;else&#123;</div><div class="line">return;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当然还要在setTitleLabels的方法中给label加上手势<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UITapGestureRecognizer* tapGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(titleLabelClickedWithGes:)];</div><div class="line">[label addGestureRecognizer:tapGes];</div></pre></td></tr></table></figure></p>
+<p>好了，介绍这简单的滚动标题的第一部分的文章就到这里。由于本人第一次写文章，所以希望大家见谅并且指出我的不足。还有一些宏定义在代码中有，一切以工程里的代码为主。第二部分的关于PageContentView和PageTitleView用代理方法通信的文章我会尽快更新。感谢你的阅读。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/24/scrollDemoPart1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/24/test/" class="archive-article-date">
-  	<time datetime="2017-03-24T10:10:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/24/test/">test</a>
-    </h1>
+  
+    <a href="/2017/03/24/test/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">test</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="scrollDemoPart1" data-title="iOS 用objective-C实现简单的滚动标题栏（一）" data-url="http://yoursite.com/2017/03/24/scrollDemoPart1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"litten-hexo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/24/hello-world/" class="archive-article-date">
-  	<time datetime="2017-03-24T08:06:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/24/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -272,8 +328,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
