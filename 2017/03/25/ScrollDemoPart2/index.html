@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | Hexo</title>
+  <title>iOS 用objective-C实现简单的滚动标题栏（二） | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="#iOS 用objective-C实现简单的滚动标题栏（二）接着上篇文章我们继续写PageTitleView和PageContentView用代理进行通讯，这是项目的github地址 ScrollViewDemo当我们点击PageTittleView上的titleLabel是 虽然位置颜色都发生了改变，但是pageContentView并没有发生改变，所以我采取了用代理协议
+123456789//">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 用objective-C实现简单的滚动标题栏（二）">
+<meta property="og:url" content="http://yoursite.com/2017/03/25/ScrollDemoPart2/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#iOS 用objective-C实现简单的滚动标题栏（二）接着上篇文章我们继续写PageTitleView和PageContentView用代理进行通讯，这是项目的github地址 ScrollViewDemo当我们点击PageTittleView上的titleLabel是 虽然位置颜色都发生了改变，但是pageContentView并没有发生改变，所以我采取了用代理协议
+123456789//">
+<meta property="og:updated_time" content="2017-03-25T11:32:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="iOS 用objective-C实现简单的滚动标题栏（二）">
+<meta name="twitter:description" content="#iOS 用objective-C实现简单的滚动标题栏（二）接着上篇文章我们继续写PageTitleView和PageContentView用代理进行通讯，这是项目的github地址 ScrollViewDemo当我们点击PageTittleView上的titleLabel是 虽然位置颜色都发生了改变，但是pageContentView并没有发生改变，所以我采取了用代理协议
+123456789//">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -153,130 +160,158 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-ScrollDemoPart2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      iOS 用objective-C实现简单的滚动标题栏（二）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/25/ScrollDemoPart2/" class="archive-article-date">
+
+        
+        <a href="/2017/03/25/ScrollDemoPart2/" class="archive-article-date">
   	<time datetime="2017-03-25T11:29:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-25</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/25/ScrollDemoPart2/">iOS 用objective-C实现简单的滚动标题栏（二）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#iOS 用objective-C实现简单的滚动标题栏（二）<br>接着上篇文章我们继续写PageTitleView和PageContentView用代理进行通讯，这是项目的github地址 <a href="https://github.com/atonine/ScrollViewDemo" target="_blank" rel="external">ScrollViewDemo</a><br>当我们点击PageTittleView上的titleLabel是 虽然位置颜色都发生了改变，但是pageContentView并没有发生改变，所以我采取了用代理协议</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//PageTitleView.h</span></div><div class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">PageTitleViewDelegate</span> &lt;<span class="title">NSObject</span>&gt;</span></div><div class="line"></div><div class="line">-(<span class="keyword">void</span>) pageTitletView:(<span class="keyword">id</span>)contentView selectedIndex:(<span class="built_in">NSInteger</span>)targetIndex;</div><div class="line"><span class="keyword">@end</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">assign</span>,<span class="keyword">nonatomic</span>)<span class="keyword">id</span>&lt;PageTitleViewDelegate&gt;delegate;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>然后我们点击之后就可以通过这个代理向PageContentView“取得联系”</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//PageTitleView.m</span></div><div class="line">-(<span class="keyword">void</span>)titleLabelClickedWithGes:(<span class="built_in">UITapGestureRecognizer</span>*)ges&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (ges.view) &#123;</div><div class="line">    	<span class="comment">/*</span></div><div class="line">    	...</div><div class="line">        中间省略了很多无关代码</div><div class="line">        ...</div><div class="line">    	*/</div><div class="line">        </div><div class="line">        </div><div class="line">        [<span class="keyword">self</span>.delegate pageTitletView:<span class="keyword">self</span> selectedIndex:<span class="keyword">self</span>.currentIndex];</div><div class="line">        <span class="comment">//代理方法</span></div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有设置一些两者”联系”的所需线路:暴露的方法</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//PageContentView.h</span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">PageContentView</span> : <span class="title">UIView</span></span></div><div class="line"><span class="comment">/*</span></div><div class="line">省略无关属性及方法</div><div class="line">*/</div><div class="line">-(<span class="keyword">void</span>)setCurrentIndex:(<span class="built_in">NSInteger</span>)index;<span class="comment">//向外暴露的方法，用于点击titleLabel后所调用设置当前PageContentView的子视图</span></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>当点击title的时候 pageContentView的视图必须发生改变,PageContentView的CollectionViews的偏离位置发生改变</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)setCurrentIndex:(<span class="built_in">NSInteger</span>)index&#123;</div><div class="line">    <span class="built_in">CGFloat</span> offsetX = index*<span class="keyword">self</span>.collectionView.frame.size.width;</div><div class="line">    [<span class="keyword">self</span>.collectionView setContentOffset:<span class="built_in">CGPointMake</span>(offsetX, <span class="number">0</span>)];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后就是在主控制器实现该代理</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)pageTitletView:(<span class="keyword">id</span>)contentView selectedIndex:(<span class="built_in">NSInteger</span>)targetIndex&#123;</div><div class="line">    [<span class="keyword">self</span>.pageContentView setCurrentIndex:targetIndex];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着当我们滑动pageContentView时PageTitleView的titleLabel也会发生相对的改变 所以与上面类似 我们还要在PageContentView声明代理协议</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">PageContentViewDelegate</span> &lt;<span class="title">NSObject</span>&gt;</span></div><div class="line"></div><div class="line">-(<span class="keyword">void</span>) pageContentView:(<span class="keyword">id</span>)contentView progress:(<span class="built_in">CGFloat</span>)progress sourceIndex:(<span class="built_in">NSInteger</span>)sourceIndex targetIndex:(<span class="built_in">NSInteger</span>)targetIndex;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">PageContentView</span> : <span class="title">UIView</span></span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">assign</span>,<span class="keyword">nonatomic</span>)<span class="keyword">id</span>&lt;PageContentViewDelegate&gt;delegate;</div><div class="line"><span class="comment">/*</span></div><div class="line">省略部分分无关的属性和方法</div><div class="line">*/</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>这次是滑动发生了改变，所以要记录一开始的位置的横坐标</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">PageContentView</span> ()&lt;<span class="title">UICollectionViewDataSource</span>,<span class="title">UICollectionViewDelegate</span>&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>)<span class="built_in">CGFloat</span> startOffset;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>还要实现Collection的scrollViewDidScroll:(UIScrollView <em>)scrollView和scrollViewWillBeginDragging:(UIScrollView </em>)scrollView的代理方法。</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView&#123;</div><div class="line">    <span class="comment">//获取数据</span></div><div class="line">  </div><div class="line">    <span class="built_in">CGFloat</span> progress = <span class="number">0</span>;</div><div class="line">    <span class="built_in">NSInteger</span> sourceIndex = <span class="number">0</span>;</div><div class="line">    <span class="built_in">NSInteger</span> targetIndex = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">//判断左右滑</span></div><div class="line">    <span class="built_in">CGFloat</span> currentOffsetX = scrollView.contentOffset.x;</div><div class="line">    <span class="built_in">CGFloat</span> scrollViewW = scrollView.bounds.size.width;</div><div class="line">    <span class="keyword">if</span> (currentOffsetX&gt;<span class="keyword">self</span>.startOffset) &#123;</div><div class="line">        <span class="comment">//左滑</span></div><div class="line">        progress = currentOffsetX/scrollViewW-floor(currentOffsetX/scrollViewW);</div><div class="line">        sourceIndex = (<span class="built_in">NSInteger</span>)(currentOffsetX/scrollViewW);</div><div class="line">        targetIndex = sourceIndex+<span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (targetIndex&gt;=<span class="keyword">self</span>.childVcs.count) &#123;</div><div class="line">            targetIndex = <span class="keyword">self</span>.childVcs.count<span class="number">-1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (currentOffsetX-<span class="keyword">self</span>.startOffset==scrollViewW) &#123;</div><div class="line">            progress = <span class="number">1</span>;</div><div class="line">            targetIndex = sourceIndex;</div><div class="line">        &#125;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">//右滑</span></div><div class="line">   </div><div class="line">        progress = <span class="number">1</span>-(currentOffsetX/scrollViewW-floor(currentOffsetX/scrollViewW));</div><div class="line">        targetIndex = (<span class="built_in">NSInteger</span>)(currentOffsetX/scrollViewW);</div><div class="line">        sourceIndex = targetIndex+<span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (sourceIndex&gt;=<span class="keyword">self</span>.childVcs.count) &#123;</div><div class="line">            sourceIndex=<span class="keyword">self</span>.childVcs.count<span class="number">-1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    [<span class="keyword">self</span>.delegate pageContentView:<span class="keyword">self</span> progress:progress sourceIndex:sourceIndex targetIndex:targetIndex];</div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)scrollViewWillBeginDragging:(<span class="built_in">UIScrollView</span> *)scrollView&#123;</div><div class="line">      <span class="keyword">self</span>.startOffset  = scrollView.contentOffset.x;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然判断向左滑还是右滑，是进行了一番计算得到的算，需要大家好好理解</p>
+<p>当然在PageTitleView也需要提供“联系”接口</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">PageTitleView</span> : <span class="title">UIView</span></span></div><div class="line"></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">assign</span>,<span class="keyword">nonatomic</span>)<span class="keyword">id</span>&lt;PageTitleViewDelegate&gt;delegate;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">省略了部分的无关的方法</div><div class="line">*/</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)setTitleWithProgress:(<span class="built_in">CGFloat</span>)progress sourceIndex:(<span class="built_in">NSInteger</span>)index targetIndex:(<span class="built_in">NSInteger</span>)index;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>当滑动时titleLabel的颜色是渐变的</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-(<span class="keyword">void</span>)titleLabelClickedWithGes:(<span class="built_in">UITapGestureRecognizer</span>*)ges&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (ges.view) &#123;</div><div class="line">        <span class="built_in">UILabel</span> *currentLabel = (<span class="built_in">UILabel</span>*)ges.view;</div><div class="line">        <span class="built_in">UILabel</span>*oldLabel = <span class="keyword">self</span>.titleLabels[<span class="keyword">self</span>.currentIndex];</div><div class="line">        <span class="keyword">self</span>.currentIndex = currentLabel.tag;</div><div class="line">        currentLabel.textColor = [<span class="built_in">UIColor</span> orangeColor];</div><div class="line">        oldLabel.textColor = [<span class="built_in">UIColor</span> darkGrayColor];</div><div class="line">        <span class="built_in">CGFloat</span> scrollLineX = currentLabel.tag*<span class="keyword">self</span>.scrollLine.frame.size.width;</div><div class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.15</span> animations:^&#123;</div><div class="line">            <span class="keyword">self</span>.scrollLine.frame = <span class="built_in">CGRectMake</span>(scrollLineX, <span class="keyword">self</span>.frame.size.height-kScrollLineH, currentLabel.frame.size.width, <span class="number">2.0</span>);</div><div class="line">        &#125;];</div><div class="line">        [<span class="keyword">self</span>.delegate pageTitletView:<span class="keyword">self</span> selectedIndex:<span class="keyword">self</span>.currentIndex];</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后在视图控制器中实现代理</p>
+<figure class="highlight obj-c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-(<span class="keyword">void</span>)pageContentView:(<span class="keyword">id</span>)contentView progress:(<span class="built_in">CGFloat</span>)progress sourceIndex:(<span class="built_in">NSInteger</span>)sourceIndex targetIndex:(<span class="built_in">NSInteger</span>)targetIndex&#123;</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span>.pageTitleView setTitleWithProgress:progress sourceIndex:sourceIndex targetIndex:targetIndex];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这篇关于用Objective-C实现滚动标题的文章结束了，大家若还有什么问题。欢迎在评论区留言</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/25/ScrollDemoPart2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/24/scrollDemoPart1/" class="archive-article-date">
-  	<time datetime="2017-03-24T14:23:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/24/scrollDemoPart1/">iOS 用objective-C实现简单的滚动标题栏（一）</a>
-    </h1>
+  
+    <a href="/2017/03/24/scrollDemoPart1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS 用objective-C实现简单的滚动标题栏（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ScrollDemoPart2" data-title="iOS 用objective-C实现简单的滚动标题栏（二）" data-url="http://yoursite.com/2017/03/25/ScrollDemoPart2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"litten-hexo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/24/test/" class="archive-article-date">
-  	<time datetime="2017-03-24T10:10:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/24/test/">test</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/24/hello-world/" class="archive-article-date">
-  	<time datetime="2017-03-24T08:06:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/24/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -299,8 +334,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
